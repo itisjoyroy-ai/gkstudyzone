@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অনলাইন কুইজ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="timerBox">বাকি সময়: ২০:০০ মিনিট</div>
+        <div id="qInfo">প্রশ্ন ১ / ৩০</div>
+        <div class="question" id="qText">লোডিং...</div>
+        <div id="options" class="options-grid"></div>
+        <div class="nav-btns">
+            <button id="prevBtn" onclick="changeQuestion(-1)">আগেরটি</button>
+            <button id="nextBtn" onclick="changeQuestion(1)">পরেরটি</button>
+            <button id="submitBtn" onclick="submitQuiz()">সব জমা দিন</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
