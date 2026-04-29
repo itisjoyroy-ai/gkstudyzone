@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অনলাইন কুইজ</title>
+    <title>অনলাইন পরীক্ষা</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="quiz-container">
-        <div id="timerBox">বাকি সময়: ২০:০০ মিনিট</div>
-        <div id="qInfo">প্রশ্ন ১ / ৩০</div>
-        <div class="question" id="qText">লোডিং...</div>
-        <div id="options" class="options-grid"></div>
-        <div class="nav-btns">
-            <button id="prevBtn" onclick="changeQuestion(-1)">আগেরটি</button>
-            <button id="nextBtn" onclick="changeQuestion(1)">পরেরটি</button>
+        <div id="timerBox">বাকি সময়: ২০:০০</div>
+        <div id="qInfo" style="font-weight: bold; color: #7f8c8d;">প্রশ্ন ১ / ৩০</div>
+        <div id="qText" style="font-size: 20px; margin: 25px 0; font-weight: bold; line-height: 1.4;">লোড হচ্ছে...</div>
+        <div id="options"></div>
+        <div class="nav-btns" style="display: flex; justify-content: space-between; margin-top: 25px;">
+            <button id="prevBtn" onclick="changeQ(-1)">আগেরটি</button>
+            <button id="nextBtn" onclick="changeQ(1)">পরেরটি</button>
             <button id="submitBtn" onclick="submitQuiz()">সব জমা দিন</button>
         </div>
     </div>
