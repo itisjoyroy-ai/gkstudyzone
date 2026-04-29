@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>কুইজ লগইন - কাউন্টডাউন</title>
+    <title>প্রবেশদ্বার - অনলাইন কুইজ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="clock">
         <div class="hand hour" id="hour-hand"></div>
         <div class="hand minute" id="minute-hand"></div>
@@ -15,46 +14,45 @@
     </div>
 
     <div class="login-card">
-        <h2>কুইজ লগইন</h2>
-        <input type="text" id="studentId" placeholder="স্টুডেন্ট আইডি">
+        <h2>পরীক্ষার্থী লগইন</h2>
+        <input type="text" id="studentId" placeholder="স্টুডেন্ট আইডি (student01)">
         <input type="password" id="password" placeholder="পাসওয়ার্ড">
-        
         <div id="digital-timer">অপেক্ষা করুন...</div>
-        
         <button id="startBtn" disabled onclick="startQuiz()">কুইজ শুরু করুন</button>
     </div>
 
     <script>
-        const targetTime = new Date(2026, 3, 29, 20, 30, 0); // ২৯ এপ্রিল, রাত ৮:৩০
+        const targetTime = new Date(2026, 3, 29, 20, 30, 0); 
 
-        function toBengaliNumber(n) {
-            const bng = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
-            return n.toString().split("").map(x => bng[x] || x).join("");
+        function toBN(n) {
+            const b = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+            return n.toString().split("").map(x => b[x] || x).join("");
         }
 
         function updateClock() {
             const now = new Date();
-            const secs = now.getSeconds();
-            const mins = now.getMinutes();
-            const hrs = now.getHours();
-
-            document.getElementById('second-hand').style.transform = `translateX(-50%) rotate(${(secs/60)*360}deg)`;
-            document.getElementById('minute-hand').style.transform = `translateX(-50%) rotate(${((mins + secs/60)/60)*360}deg)`;
-            document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${((hrs%12 + mins/60)/12)*360}deg)`;
+            const s = now.getSeconds(), m = now.getMinutes(), h = now.getHours();
+            document.getElementById('second-hand').style.transform = `translateX(-50%) rotate(${(s/60)*360}deg)`;
+            document.getElementById('minute-hand').style.transform = `translateX(-50%) rotate(${((m + s/60)/60)*360}deg)`;
+            document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${((h%12 + m/60)/12)*360}deg)`;
 
             const diff = targetTime - now;
             if (diff <= 0) {
                 document.getElementById('digital-timer').innerText = "কুইজ শুরু হয়েছে!";
                 document.getElementById('startBtn').disabled = false;
             } else {
-                const m = Math.floor(diff / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                document.getElementById('digital-timer').innerText = `বাকি সময়: ${toBengaliNumber(m)} মিনিট ${toBengaliNumber(s)} সেকেন্ড`;
+                const min = Math.floor(diff / 60000), sec = Math.floor((diff % 60000) / 1000);
+                document.getElementById('digital-timer').innerText = `বাকি সময়: ${toBN(min)} মিনিট ${toBN(sec)} সেকেন্ড`;
             }
         }
         setInterval(updateClock, 1000);
 
-        const users = { "১০১": "১২৩৪", "১০২": "৫৬৭৮" }; // আপনার আইডি লিস্ট
+        // ৩০ জন স্টুডেন্ট আইডি এবং পাসওয়ার্ড জেনারেটর
+        const users = {};
+        for(let i=1; i<=30; i++) {
+            let idNum = i < 10 ? "0" + i : i;
+            users["student" + idNum] = "studyzone22" + idNum;
+        }
 
         function startQuiz() {
             const id = document.getElementById('studentId').value;
